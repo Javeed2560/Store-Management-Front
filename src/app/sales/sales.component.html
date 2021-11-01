@@ -1,0 +1,127 @@
+<!-- Button trigger modal -->
+<p type="button" class="add" data-toggle="modal" data-target="#myModal">
+    +
+</p>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button #closebutton type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Sales</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form" [formGroup]="registrationForm" (ngSubmit)="addSales()" autocomplete="off">
+                    <input type="text" formControlName="salesChannel" placeholder="Sales Channel">
+                    <br />
+                    <input type="text" formControlName="orderNumber" placeholder="Order Number">
+                    <br />
+                    <select (change)="changeProduct($event)" formControlName="product">
+                        <option value="">Choose Product</option>
+                        <option *ngFor="let p of products" [value]="p.id">{{p.name}}</option>
+                    </select>
+                    <br />
+                    <select (change)="changeCustomer($event)" formControlName="customer">
+                        <option value="">Choose Customer</option>
+                        <option *ngFor="let c of customers" [value]="c.id">{{c.firstName}} {{c.lastName}}</option>
+                    </select>
+                    <br />
+                    <select (change)="changeCurrency($event)" formControlName="currency">
+                        <option value="">Choose Currency</option>
+                        <option *ngFor="let c of currencies" [value]="c.id">{{c.name}}</option>
+                    </select>
+                    <br />
+                    <input type="number" formControlName="netAmount" placeholder="Net Amount">
+                    <br />
+                    <input type="number" formControlName="tax" placeholder="Tax">
+                    <br />
+                    <input type="number" formControlName="shippingCost" placeholder="Shipping Cost">
+                    <br />
+                    <input type="number" formControlName="grossAmount" placeholder="Gross Amount">
+                    <br />
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myUpdateModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button #closedeletebutton type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Sales</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form" [formGroup]="registrationForm" (ngSubmit)="updateSales()" autocomplete="off">
+                    <input type="text" formControlName="salesChannel" placeholder="Sales Channel">
+                    <br />
+                    <input type="text" formControlName="orderNumber" placeholder="Order Number">
+                    <br />
+                    <select (change)="changeProduct($event)" formControlName="product">
+                        <option value="">Choose Product</option>
+                        <option *ngFor="let p of products" [value]="p.id">{{p.name}}</option>
+                    </select>
+                    <br />
+                    <select (change)="changeCustomer($event)" formControlName="customer">
+                        <option value="">Choose Customer</option>
+                        <option *ngFor="let c of customers" [value]="c.id">{{c.firstName}} {{c.lastName}}</option>
+                    </select>
+                    <br />
+                    <select (change)="changeCurrency($event)" formControlName="currency">
+                        <option value="">Choose Currency</option>
+                        <option *ngFor="let c of currencies" [value]="c.id">{{c.name}}</option>
+                    </select>
+                    <br />
+                    <input type="number" formControlName="netAmount" placeholder="Net Amount">
+                    <br />
+                    <input type="number" formControlName="tax" placeholder="Tax">
+                    <br />
+                    <input type="number" formControlName="shippingCost" placeholder="Shipping Cost">
+                    <br />
+                    <input type="number" formControlName="grossAmount" placeholder="Gross Amount">
+                    <br />
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="table-body">
+    <table>
+        <tr>
+            <th>Sales Channel</th>
+            <th>Order Number</th>
+            <th>Product Name</th>
+            <th>Customer Name</th>
+            <th>Currency</th>
+            <th>Net Amount</th>
+            <th>Tax</th>
+            <th>Shipping Cost</th>
+            <th>Gross Amount</th>
+            <th>Actions</th>
+        </tr>
+        <tr *ngFor="let item of sales;">
+            <td>{{item.salesChannel}}</td>
+            <td>{{item.orderNumber}}</td>
+            <td>{{item.product.name}}</td>
+            <td>{{item.customer.firstName}}</td>
+            <td>{{item.currency.name}}</td>
+            <td>{{item.netAmount}}</td>
+            <td>{{item.tax}}</td>
+            <td>{{item.shippingCost}}</td>
+            <td>{{item.grossAmount}}</td>
+            <td class="actions">
+                <a class="a-update" (click)="updateForm(item)" data-toggle="modal" data-target="#myUpdateModal"><i class="fas fa-edit"></i></a>
+                <a class="a-delete" (click)="deleteSales(item.id)"><i class="fas fa-trash-alt"></i></a>
+            </td>
+        </tr>
+    </table>
+</section>

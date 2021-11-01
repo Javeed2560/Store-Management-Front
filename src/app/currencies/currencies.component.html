@@ -1,0 +1,63 @@
+<!-- Button trigger modal -->
+<p type="button" class="add" data-toggle="modal" data-target="#myModal">
+    +
+</p>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button #closebutton type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Currency</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form" [formGroup]="registrationForm" (ngSubmit)="addCurrency()" autocomplete="off">
+                    <input type="text" placeholder="Currency name" formControlName="name">
+                    <br />
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myUpdateModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button #closedeletebutton type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Update Currency</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form" [formGroup]="registrationForm" (ngSubmit)="updateCurrency()" autocomplete="off">
+                    <input type="text" placeholder="Currency name" formControlName="name">
+                    <br />
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+<section class="table-body">
+    <table>
+        <tr>
+            <th>Currency Name</th>
+            <th>Actions</th>
+        </tr>
+        <tr *ngFor="let item of currencies;">
+            <td>{{item.name}}</td>
+            <td class="actions">
+                <a class="a-update" (click)="updateForm(item)" data-toggle="modal" data-target="#myUpdateModal"><i class="fas fa-edit"></i></a>
+                <a class="a-delete" (click)="deleteCurrency(item.id)"><i class="fas fa-trash-alt"></i></a>
+            </td>
+        </tr>
+    </table>
+</section>
